@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6 - Semana 3</title>
+</head>
+<body>
+    <h1>Ejercicio 6</h1>
+    <p>Diagrama de clases del sistema academico corregido, con datos de prueba.</p>
+    <p><a href="semana3.html">Volver al indice</a></p>
+
+    <script>
+        // Correcciones al diagrama: "Especilidad" -> "Especialidad",
+        // Estudiante-Materia es * a *, Notas referencia estudiante y materia,
+        // y a Notas le faltaba Buscar().
+
+        class Registro {
+            static agregar(objeto) {
+                this.registros.push(objeto);
+                return objeto;
+            }
+
+            static buscar(id) {
+                for (let i = 0; i < this.registros.length; i++) {
+                    if (this.registros[i].id === id) {
+                        return this.registros[i];
+                    }
+                }
+                return null;
+            }
+
+            static modificar(id, propiedad, valor) {
+                let encontrado = this.buscar(id);
+                if (encontrado === null) {
+                    console.log("No se encontro el registro " + id);
+                    return false;
+                }
+                encontrado[propiedad] = valor;
+                return true;
+            }
+
+            static eliminar(id) {
+                for (let i = 0; i < this.registros.length; i++) {
+                    if (this.registros[i].id === id) {
+                        this.registros.splice(i, 1);
+                        return true;
+                    }
+                }
+                console.log("No se encontro el registro " + id);
+                return false;
+            }
+        }
+
+        class Estudiante extends Registro {
+            constructor(id, nombre, apellido, direccion) {
+                super();
+                this.id = id;
+                this.nombre = nombre;
+                this.apellido = apellido;
+                this.direccion = direccion;
+                this.materias = [];
+            }
+        }
+
+        class Materia extends Registro {
+            constructor(id, nombre) {
+                super();
+                this.id = id;
+                this.nombre = nombre;
+                this.estudiantes = [];
+            }
+        }
+
+        class Docente extends Registro {
+            constructor(id, nombre, apellido, direccion, especialidad) {
+                super();
+                this.id = id;
+                this.nombre = nombre;
+                this.apellido = apellido;
+                this.direccion = direccion;
+                this.especialidad = especialidad;
+            }
+        }
+
+        class Notas extends Registro {
+            constructor(id, idEstudiante, idMateria, nota1, nota2, nota3) {
+                super();
+                this.id = id;
+                this.idEstudiante = idEstudiante;
+                this.idMateria = idMateria;
+                this.nota1 = nota1;
+                this.nota2 = nota2;
+                this.nota3 = nota3;
+            }
+
+            calcular() {
+                return (this.nota1 + this.nota2 + this.nota3) / 3;
+            }
+        }
+
+        class Departamento extends Registro {
+            constructor(id, nombre, encargado) {
+                super();
+                this.id = id;
+                this.nombre = nombre;
+                this.encargado = encargado;
+            }
+        }
+
+        class Aula extends Registro {
+            constructor(id, nombre, ubicacion, capacidad) {
+                super();
+                this.id = id;
+                this.nombre = nombre;
+                this.ubicacion = ubicacion;
+                this.capacidad = capacidad;
+            }
+        }
+
+        class Horario extends Registro {
+            constructor(id, horaInicio, horaFin, duracion) {
+                super();
+                this.id = id;
+                this.horaInicio = horaInicio;
+                this.horaFin = horaFin;
+                this.duracion = duracion;
+            }
+        }
+
+        Estudiante.registros = [];
+        Materia.registros = [];
+        Docente.registros = [];
+        Notas.registros = [];
+        Departamento.registros = [];
+        Aula.registros = [];
+        Horario.registros = [];
+
+        Departamento.agregar(new Departamento("DEP-01", "Computacion", "Ing. Karen Rivas"));
+        Docente.agregar(new Docente("DOC-01", "Luis", "Bonilla", "Santa Tecla", "Programacion"));
+        Aula.agregar(new Aula("AUL-01", "Laboratorio 3", "Edificio B", 30));
+        Horario.agregar(new Horario("HOR-01", "07:00", "09:00", 2));
+
+        let materia = Materia.agregar(new Materia("MAT-01", "Diseno Web Adaptable"));
+        let estudiante = Estudiante.agregar(new Estudiante("EST-01", "Ana", "Morales", "San Salvador"));
+        Estudiante.agregar(new Estudiante("EST-02", "Mario", "Guzman", "Soyapango"));
+
+        estudiante.materias.push(materia.id);
+        materia.estudiantes.push(estudiante.id);
+
+        let nota = Notas.agregar(new Notas("NOT-01", "EST-01", "MAT-01", 8.5, 7.0, 9.5));
+
+        console.log("===== BUSCAR =====");
+        console.log(Estudiante.buscar("EST-01"));
+
+        console.log("===== PROMEDIO DE NOTAS =====");
+        console.log("Promedio de EST-01 en MAT-01: " + nota.calcular().toFixed(2));
+
+        console.log("===== MODIFICAR =====");
+        Estudiante.modificar("EST-02", "direccion", "Ilopango");
+        console.log(Estudiante.buscar("EST-02"));
+
+        console.log("===== ELIMINAR =====");
+        Estudiante.eliminar("EST-02");
+        console.log("Estudiantes que quedan: " + Estudiante.registros.length);
+        console.log(Estudiante.registros);
+    </script>
+</body>
+</html>

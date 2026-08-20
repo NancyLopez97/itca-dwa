@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 - Semana 3</title>
+</head>
+<body>
+    <h1>Ejercicio 4</h1>
+    <p>Array con una variable entera, una decimal, un texto y un objeto Producto.</p>
+    <p><a href="semana3.html">Volver al indice</a></p>
+
+    <script>
+        let arrayExterno = [25, 3.75, "Producto en existencia"];
+
+        let producto = {
+            codigo: "P-001",
+            nombre: "Teclado mecanico",
+            precio: 45.90,
+            cantidad: 40,
+            categoria: "Accesorios",
+
+            existenciasPorMes: [12, 8, 15, 20, 5, 9, 17],
+
+            obtenerMensaje: function () {
+                return "El producto " + this.nombre + " cuesta $" + this.precio;
+            },
+
+            obtenerProveedor: function () {
+                return {
+                    codigo: "PR-01",
+                    nombre: "Distribuidora Tecnologica",
+                    pais: "El Salvador"
+                };
+            }
+        };
+
+        arrayExterno.push(producto);
+
+        console.log("===== ELEMENTOS DEL ARRAY EXTERNO =====");
+        arrayExterno.forEach(function (elemento, indice) {
+            console.log("Posicion " + indice + ":");
+            console.log(elemento);
+        });
+
+        console.log("===== FUNCIONES DEL PRODUCTO =====");
+        console.log(producto.obtenerMensaje());
+        console.log(producto.obtenerProveedor());
+
+        console.log("===== ULTIMA POSICION DEL ARRAY INTERNO =====");
+        let ultima = producto.existenciasPorMes.length - 1;
+        console.log("Posicion " + ultima + " = " + producto.existenciasPorMes[ultima]);
+    </script>
+</body>
+</html>

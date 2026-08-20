@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7 - Semana 3</title>
+</head>
+<body>
+    <h1>Ejercicio 7</h1>
+    <p>Diagrama de herencia de animales con constructores, metodos y funciones estaticas.</p>
+    <p><a href="semana3.html">Volver al indice</a></p>
+
+    <script>
+        class Animal {
+            constructor(nombre, edad) {
+                this.nombre = nombre;
+                this.edad = edad;
+            }
+
+            presentarse() {
+                return this.nombre + " tiene " + this.edad + " anios.";
+            }
+
+            static reino() {
+                return "Animalia";
+            }
+        }
+
+        class Mamifero extends Animal {
+            constructor(nombre, edad, tipoPelaje) {
+                super(nombre, edad);
+                this.tipoPelaje = tipoPelaje;
+            }
+
+            amamantar() {
+                return this.nombre + " alimenta a sus crias con leche.";
+            }
+
+            static caracteristica() {
+                return "Sangre caliente y glandulas mamarias.";
+            }
+        }
+
+        class Perro extends Mamifero {
+            constructor(nombre, edad, tipoPelaje, raza) {
+                super(nombre, edad, tipoPelaje);
+                this.raza = raza;
+            }
+
+            ladrar() {
+                return this.nombre + " dice: Guau!";
+            }
+
+            static esDomestico() {
+                return true;
+            }
+        }
+
+        class Gato extends Mamifero {
+            constructor(nombre, edad, tipoPelaje, color) {
+                super(nombre, edad, tipoPelaje);
+                this.color = color;
+            }
+
+            maullar() {
+                return this.nombre + " dice: Miau!";
+            }
+
+            static vidas() {
+                return 7;
+            }
+        }
+
+        class Humano extends Mamifero {
+            constructor(nombre, edad, tipoPelaje, profesion) {
+                super(nombre, edad, tipoPelaje);
+                this.profesion = profesion;
+            }
+
+            hablar() {
+                return this.nombre + " trabaja como " + this.profesion + ".";
+            }
+
+            static especie() {
+                return "Homo sapiens";
+            }
+        }
+
+        class Hombre extends Humano {
+            constructor(nombre, edad, tipoPelaje, profesion, tallaCamisa) {
+                super(nombre, edad, tipoPelaje, profesion);
+                this.tallaCamisa = tallaCamisa;
+            }
+
+            mostrarTalla() {
+                return this.nombre + " usa camisa talla " + this.tallaCamisa + ".";
+            }
+
+            static genero() {
+                return "Masculino";
+            }
+        }
+
+        class Mujer extends Humano {
+            constructor(nombre, edad, tipoPelaje, profesion, tallaBlusa) {
+                super(nombre, edad, tipoPelaje, profesion);
+                this.tallaBlusa = tallaBlusa;
+            }
+
+            mostrarTalla() {
+                return this.nombre + " usa blusa talla " + this.tallaBlusa + ".";
+            }
+
+            static genero() {
+                return "Femenino";
+            }
+        }
+
+        class Reptil extends Animal {
+            constructor(nombre, edad, tipoEscamas) {
+                super(nombre, edad);
+                this.tipoEscamas = tipoEscamas;
+            }
+
+            arrastrarse() {
+                return this.nombre + " se desplaza pegado al suelo.";
+            }
+
+            static caracteristica() {
+                return "Sangre fria y piel con escamas.";
+            }
+        }
+
+        class Cocodrilo extends Reptil {
+            constructor(nombre, edad, tipoEscamas, largoHocico) {
+                super(nombre, edad, tipoEscamas);
+                this.largoHocico = largoHocico;
+            }
+
+            nadar() {
+                return this.nombre + " nada en el rio.";
+            }
+
+            static habitat() {
+                return "Rios y pantanos";
+            }
+        }
+
+        class Serpiente extends Reptil {
+            constructor(nombre, edad, tipoEscamas, esVenenosa) {
+                super(nombre, edad, tipoEscamas);
+                this.esVenenosa = esVenenosa;
+            }
+
+            sisear() {
+                if (this.esVenenosa) {
+                    return this.nombre + " sisea y es venenosa.";
+                }
+                return this.nombre + " sisea y no es venenosa.";
+            }
+
+            static habitat() {
+                return "Bosques y zonas secas";
+            }
+        }
+
+        let perro = new Perro("Rocky", 4, "corto", "Labrador");
+        let gato = new Gato("Michi", 2, "largo", "gris");
+        let hombre = new Hombre("Carlos", 30, "corto", "Ingeniero", "M");
+        let mujer = new Mujer("Ana", 27, "largo", "Disenadora", "S");
+        let cocodrilo = new Cocodrilo("Coco", 15, "duras", 45);
+        let serpiente = new Serpiente("Kaa", 3, "lisas", true);
+
+        console.log("Reino: " + Animal.reino());
+
+        console.log("===== PERRO =====");
+        console.log(perro.presentarse());
+        console.log(perro.amamantar());
+        console.log(perro.ladrar());
+        console.log("Es domestico: " + Perro.esDomestico());
+
+        console.log("===== GATO =====");
+        console.log(gato.presentarse());
+        console.log(gato.maullar());
+        console.log("Vidas: " + Gato.vidas());
+
+        console.log("===== HOMBRE =====");
+        console.log(hombre.presentarse());
+        console.log(hombre.hablar());
+        console.log(hombre.mostrarTalla());
+        console.log("Genero: " + Hombre.genero() + " | Especie: " + Humano.especie());
+
+        console.log("===== MUJER =====");
+        console.log(mujer.presentarse());
+        console.log(mujer.hablar());
+        console.log(mujer.mostrarTalla());
+        console.log("Genero: " + Mujer.genero());
+
+        console.log("===== COCODRILO =====");
+        console.log(cocodrilo.presentarse());
+        console.log(cocodrilo.arrastrarse());
+        console.log(cocodrilo.nadar());
+        console.log("Habitat: " + Cocodrilo.habitat());
+
+        console.log("===== SERPIENTE =====");
+        console.log(serpiente.presentarse());
+        console.log(serpiente.sisear());
+        console.log("Habitat: " + Serpiente.habitat());
+    </script>
+</body>
+</html>

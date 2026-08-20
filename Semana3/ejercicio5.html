@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5 - Semana 3</title>
+</head>
+<body>
+    <h1>Ejercicio 5</h1>
+    <p>Modelo universitario: empleados docentes y administrativos con herencia y metodos estaticos.</p>
+    <p><a href="semana3.html">Volver al indice</a></p>
+
+    <script>
+        class Empleado {
+            constructor(codigo, nombre, edad, cargo, fechaIngreso, genero) {
+                this.codigo = codigo;
+                this.nombre = nombre;
+                this.edad = edad;
+                this.cargo = cargo;
+                this.fechaIngreso = fechaIngreso;
+                this.genero = genero;
+            }
+
+            mostrarDatos() {
+                console.log("Codigo: " + this.codigo + " | " + this.nombre +
+                            " | " + this.edad + " anios | " + this.cargo +
+                            " | ingreso: " + this.fechaIngreso + " | " + this.genero);
+            }
+
+            calcularSalario() {
+                return 0;
+            }
+
+            static tiposDeEmpleado() {
+                return "Docente y Administrativo";
+            }
+        }
+
+        class Docente extends Empleado {
+            constructor(codigo, nombre, edad, fechaIngreso, genero, especialidad) {
+                super(codigo, nombre, edad, "Docente", fechaIngreso, genero);
+                this.especialidad = especialidad;
+            }
+        }
+
+        class DocentePermanente extends Docente {
+            constructor(codigo, nombre, edad, fechaIngreso, genero, especialidad, sueldoBase) {
+                super(codigo, nombre, edad, fechaIngreso, genero, especialidad);
+                this.sueldoBase = sueldoBase;
+            }
+
+            calcularSalario() {
+                return this.sueldoBase;
+            }
+        }
+
+        class DocenteServiciosProfesionales extends Docente {
+            constructor(codigo, nombre, edad, fechaIngreso, genero, especialidad, precioHora, cantidadHoras) {
+                super(codigo, nombre, edad, fechaIngreso, genero, especialidad);
+                this.precioHora = precioHora;
+                this.cantidadHoras = cantidadHoras;
+            }
+
+            calcularSalario() {
+                return this.precioHora * this.cantidadHoras;
+            }
+        }
+
+        class Administrativo extends Empleado {
+            constructor(codigo, nombre, edad, fechaIngreso, genero, area) {
+                super(codigo, nombre, edad, "Administrativo", fechaIngreso, genero);
+                this.area = area;
+            }
+        }
+
+        class AdministrativoTiempoCompleto extends Administrativo {
+            constructor(codigo, nombre, edad, fechaIngreso, genero, area, sueldoMensual) {
+                super(codigo, nombre, edad, fechaIngreso, genero, area);
+                this.sueldoMensual = sueldoMensual;
+            }
+
+            calcularSalario() {
+                return this.sueldoMensual;
+            }
+        }
+
+        class AdministrativoMedioTiempo extends Administrativo {
+            constructor(codigo, nombre, edad, fechaIngreso, genero, area, sueldoMensual) {
+                super(codigo, nombre, edad, fechaIngreso, genero, area);
+                this.sueldoMensual = sueldoMensual;
+            }
+
+            calcularSalario() {
+                return this.sueldoMensual / 2;
+            }
+        }
+
+        let empleados = [
+            new DocentePermanente("D-01", "Karen Rivas", 38, "01/02/2019", "Femenino", "Programacion", 1200),
+            new DocenteServiciosProfesionales("D-02", "Luis Bonilla", 45, "10/08/2022", "Masculino", "Redes", 15, 60),
+            new AdministrativoTiempoCompleto("A-01", "Marta Flores", 33, "15/03/2020", "Femenino", "Registro", 900),
+            new AdministrativoMedioTiempo("A-02", "Jose Portillo", 29, "05/01/2023", "Masculino", "Biblioteca", 800)
+        ];
+
+        console.log("Tipos de empleado: " + Empleado.tiposDeEmpleado());
+        console.log("===== PLANILLA =====");
+
+        empleados.forEach(function (empleado) {
+            empleado.mostrarDatos();
+            console.log("   Salario a pagar: $" + empleado.calcularSalario().toFixed(2));
+        });
+    </script>
+</body>
+</html>

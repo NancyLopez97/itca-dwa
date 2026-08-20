@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 - Semana 3</title>
+</head>
+<body>
+    <h1>Ejercicio 3</h1>
+    <p>Arreglo de nombres: agregar al inicio, al final, en medio, copiar y ordenar.</p>
+    <p><a href="semana3.html">Volver al indice</a></p>
+
+    <script>
+        let nombres = ["Carlos", "Maria", "Jose", "Ana", "Luis",
+                       "Sofia", "Pedro", "Elena", "Mario", "Lucia"];
+
+        console.log("Array original (" + nombres.length + " nombres):");
+        console.log(nombres);
+
+        nombres.unshift("Rosa");
+        nombres.push("Pepe");
+        nombres.splice(1, 0, "Desarrollo");
+
+        console.log("Despues de agregar Rosa, Pepe y Desarrollo:");
+        console.log(nombres);
+
+        let copia = nombres.slice();
+        copia.sort();
+        copia.reverse();
+
+        console.log("Copia ordenada de forma descendente:");
+        console.log(copia);
+
+        console.log("El array original no se modifico:");
+        console.log(nombres);
+    </script>
+</body>
+</html>

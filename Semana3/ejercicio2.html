@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 - Semana 3</title>
+</head>
+<body>
+    <h1>Ejercicio 2</h1>
+    <p>Funcion de primera clase que implementa 3 funciones para calcular areas.</p>
+    <p><a href="semana3.html">Volver al indice</a></p>
+
+    <script>
+        function crearCalculadoraDeAreas() {
+            return {
+                rectangulo: function (base, altura) {
+                    return base * altura;
+                },
+                triangulo: function (base, altura) {
+                    return (base * altura) / 2;
+                },
+                rombo: function (diagonalMayor, diagonalMenor) {
+                    return (diagonalMayor * diagonalMenor) / 2;
+                }
+            };
+        }
+
+        const areas = crearCalculadoraDeAreas();
+
+        console.log("===== CALCULO DE AREAS =====");
+        console.log("Rectangulo (base 10, altura 5): " + areas.rectangulo(10, 5));
+        console.log("Triangulo (base 8, altura 6): " + areas.triangulo(8, 6));
+        console.log("Rombo (diagonales 12 y 7): " + areas.rombo(12, 7));
+    </script>
+</body>
+</html>

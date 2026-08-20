@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 - Semana 3</title>
+</head>
+<body>
+    <h1>Ejercicio 1</h1>
+    <p>Funcion de primera clase que lee los datos de un cliente y funcion anonima que aplica el IVA.</p>
+    <p><a href="semana3.html">Volver al indice</a></p>
+
+    <script>
+        const aplicarIVA = function (monto) {
+            return monto + (monto * 0.13);
+        };
+
+        function leerCliente(codigo, nombre, edad, montoVenta, calcularIVA) {
+            return {
+                codigo: codigo,
+                nombre: nombre,
+                edad: edad,
+                montoSinIVA: montoVenta,
+                montoConIVA: calcularIVA(montoVenta)
+            };
+        }
+
+        const cliente = leerCliente(101, "Ana Morales", 28, 250, aplicarIVA);
+
+        console.log("===== DATOS DEL CLIENTE =====");
+        console.log("Codigo: " + cliente.codigo);
+        console.log("Nombre: " + cliente.nombre);
+        console.log("Edad: " + cliente.edad);
+        console.log("Monto sin IVA: $" + cliente.montoSinIVA.toFixed(2));
+        console.log("Monto con IVA: $" + cliente.montoConIVA.toFixed(2));
+    </script>
+</body>
+</html>
