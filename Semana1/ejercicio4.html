@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 - Funcion con parametros</title>
+</head>
+<body>
+    <h1>Ejercicio 4</h1>
+    <p>Abre la consola con F12 para ver los datos del empleado.</p>
+
+    <script>
+        // el objeto con los datos del empleado
+        var empleado = {
+            nombre: "Carlos Menjivar",
+            edad: 32,
+            salario: 850.00
+        };
+
+        // esta funcion se va a pasar como parametro
+        function imprimir(texto) {
+            console.log(texto);
+        }
+
+        // recibe 2 variables, 1 objeto y 1 funcion
+        function mostrarDatos(lugarTrabajo, cargo, datosEmpleado, funcionImprimir) {
+            funcionImprimir("Empleado: " + datosEmpleado.nombre);
+            funcionImprimir("Edad: " + datosEmpleado.edad + " anios");
+            funcionImprimir("Salario: $" + datosEmpleado.salario);
+            funcionImprimir("Lugar de trabajo: " + lugarTrabajo);
+            funcionImprimir("Cargo: " + cargo);
+        }
+
+        mostrarDatos("ITCA-FEPADE Santa Tecla", "Desarrollador Web", empleado, imprimir);
+    </script>
+</body>
+</html>

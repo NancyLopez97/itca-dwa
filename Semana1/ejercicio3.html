@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 - Objeto Estudiante</title>
+</head>
+<body>
+    <h1>Ejercicio 3</h1>
+    <p>Abre la consola con F12 para ver los datos.</p>
+
+    <script>
+        var estudiante = {
+            carnet: "169617",
+            nombre: "Raquel Lopez",
+            edad: 20,
+            facultad: {
+                nombre: "Facultad de Ingenieria",
+                escuela: {
+                    nombre: "Escuela de Ingenieria en Computacion",
+                    cantidadMaterias: 8
+                }
+            },
+            cumCiclo: 8.5,
+            direccion: {
+                departamento: "La Libertad",
+                municipio: "Santa Tecla",
+                ciudad: "Santa Tecla"
+            }
+        };
+
+        // para llegar a un dato anidado se van encadenando los puntos
+        console.log("Nombre del estudiante: " + estudiante.nombre);
+        console.log("Municipio: " + estudiante.direccion.municipio);
+        console.log("Facultad: " + estudiante.facultad.nombre);
+        console.log("CUM de ciclo: " + estudiante.cumCiclo);
+
+        alert("Nombre: " + estudiante.nombre +
+              "\nMunicipio: " + estudiante.direccion.municipio +
+              "\nFacultad: " + estudiante.facultad.nombre +
+              "\nCUM de ciclo: " + estudiante.cumCiclo);
+    </script>
+</body>
+</html>

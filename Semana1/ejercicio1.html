@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 - Condiciones if</title>
+</head>
+<body>
+    <h1>Ejercicio 1</h1>
+    <p>Completar las condiciones de los if para que los mensajes se muestren de forma correcta.</p>
+
+    <script>
+        var numero1 = 5;
+        var numero2 = 8;
+
+        // "no es mayor que" es lo contrario de numero1 > numero2
+        if (numero1 <= numero2) {
+            alert("numero1 no es mayor que numero2");
+        }
+
+        // positivo significa mayor que cero
+        if (numero2 > 0) {
+            alert("numero2 es positivo");
+        }
+
+        // se cumple si es negativo, o bien si es cualquier valor distinto de cero
+        if (numero1 < 0 || numero1 != 0) {
+            alert("numero1 es negativo o distinto de cero");
+        }
+
+        // sumarle 1 a numero1 y aun asi no alcanzar a numero2
+        if (numero1 + 1 < numero2) {
+            alert("Incrementar en 1 unidad el valor de numero1 no lo hace mayor o igual que numero2");
+        }
+    </script>
+</body>
+</html>

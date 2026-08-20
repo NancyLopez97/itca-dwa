@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 - Aprobados y reprobados</title>
+</head>
+<body>
+    <h1>Ejercicio 2</h1>
+    <p>Notas de n estudiantes: aprobado o reprobado, totales y promedio.</p>
+
+    <script>
+        var n = parseInt(prompt("Cuantos estudiantes va a ingresar?"));
+
+        var aprobados = 0;
+        var reprobados = 0;
+        var suma = 0;
+
+        for (var i = 1; i <= n; i++) {
+            var nombre = prompt("Nombre del estudiante " + i + ":");
+            var nota = parseFloat(prompt("Nota de ciclo de " + nombre + ":"));
+
+            suma = suma + nota;
+
+            if (nota >= 7.0) {
+                aprobados = aprobados + 1;
+                alert(nombre + " APROBO con " + nota);
+            } else {
+                reprobados = reprobados + 1;
+                alert(nombre + " REPROBO con " + nota);
+            }
+        }
+
+        var promedio = suma / n;
+
+        alert("Aprobados: " + aprobados + "\nReprobados: " + reprobados + "\nNota promedio: " + promedio.toFixed(2));
+
+        console.log("Aprobados: " + aprobados);
+        console.log("Reprobados: " + reprobados);
+        console.log("Nota promedio: " + promedio.toFixed(2));
+    </script>
+</body>
+</html>

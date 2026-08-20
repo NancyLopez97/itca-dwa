@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5 - Conversor de pulgadas</title>
+</head>
+<body>
+    <h1>Ejercicio 5</h1>
+    <p>Convierte pulgadas a cm, m, km y millas usando funciones anonimas.</p>
+
+    <script>
+        // funciones anonimas guardadas en variables, cada una devuelve su resultado
+        var aCentimetros = function (pulgadas) {
+            return pulgadas * 2.54;
+        };
+
+        var aMetros = function (pulgadas) {
+            return pulgadas * 0.0254;
+        };
+
+        var aKilometros = function (pulgadas) {
+            return pulgadas * 0.0000254;
+        };
+
+        var aMillas = function (pulgadas) {
+            return pulgadas / 63360;
+        };
+
+        var pulgadas = parseFloat(prompt("Ingrese la medida en pulgadas:"));
+
+        var centimetros = aCentimetros(pulgadas);
+        var metros = aMetros(pulgadas);
+        var kilometros = aKilometros(pulgadas);
+        var millas = aMillas(pulgadas);
+
+        alert(pulgadas + " pulgadas equivalen a:" +
+              "\n" + centimetros + " cm" +
+              "\n" + metros + " m" +
+              "\n" + kilometros + " km" +
+              "\n" + millas + " millas");
+
+        console.log(pulgadas + " pulgadas =");
+        console.log(centimetros + " cm");
+        console.log(metros + " m");
+        console.log(kilometros + " km");
+        console.log(millas + " millas");
+    </script>
+</body>
+</html>
