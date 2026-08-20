@@ -1,0 +1,12 @@
+{
+  "name": "gestor-numeros",
+  "version": "1.0.0",
+  "description": "Gestor de numeros con menu interactivo - Semana 2 DWA",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}
