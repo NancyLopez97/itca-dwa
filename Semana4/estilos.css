@@ -1,0 +1,35 @@
+body {
+  background-color: #f4f6fb;
+  padding-bottom: 40px;
+}
+
+.navbar {
+  background-color: #1e3a5f !important;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  background-color: #1e3a5f;
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: #2f6fb3;
+  border-color: #2f6fb3;
+}
+
+.btn-primary:hover {
+  background-color: #1e3a5f;
+  border-color: #1e3a5f;
+}
+
+#listaLibros .list-group-item {
+  border-left: 4px solid #2f6fb3;
+  font-family: "Courier New", monospace;
+  font-size: 0.9rem;
+}
