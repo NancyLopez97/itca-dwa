@@ -1,0 +1,21 @@
+body { background: #faf7f2; }
+
+.aviso { min-height: 1.2rem; font-size: .9rem; }
+
+.aviso.error { color: #c0392b; }
+
+.aviso.info { color: #2e7d32; }
+
+.tarjeta { cursor: pointer; transition: box-shadow .2s, transform .2s; }
+
+.tarjeta.resaltada { box-shadow: 0 4px 10px rgba(0,0,0,.25); transform: translateY(-3px); border-color: #b5651d; }
+
+.tarjeta .categoria { color: #777; font-size: .8rem; margin-bottom: .3rem; }
+
+.tarjeta .precio { font-weight: bold; color: #8a4b08; margin-bottom: .3rem; }
+
+.tarjeta .stock { font-size: .8rem; margin: 0; }
+
+.tarjeta.bajo-stock { border-color: #c0392b; }
+
+.tarjeta.bajo-stock .card-body::after { content: "¡Pocas unidades!"; display: block; color: #c0392b; font-size: .75rem; margin-top: .4rem; }
