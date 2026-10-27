@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inventario (Alpine.js)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>[x-cloak] { display: none !important; }</style>
+  <script src="app.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-light">
+  <main class="container py-4" x-data="inventario('data/productos.json')" x-cloak>
+    <h1 class="h3 mb-3">Inventario de productos (Alpine.js)</h1>
+    <div class="alert alert-danger" x-show="error" x-text="error"></div>
+
+    <form class="row g-2 mb-4" @submit.prevent="guardar()" novalidate>
+      <div class="col-md-4">
+        <input class="form-control" placeholder="Nombre" x-model="form.nombre" x-ref="nombre"
+               :class="{ 'is-invalid': intento && errores.nombre }">
+        <div class="invalid-feedback" x-text="errores.nombre"></div>
+      </div>
+      <div class="col-md-3">
+        <select class="form-select" x-model="form.categoria" :class="{ 'is-invalid': intento && errores.categoria }">
+          <option value="">Categoría...</option>
+          <template x-for="c in categorias" :key="c"><option :value="c" x-text="c"></option></template>
+        </select>
+        <div class="invalid-feedback" x-text="errores.categoria"></div>
+      </div>
+      <div class="col-md-2">
+        <input type="number" step="0.01" class="form-control" placeholder="Precio" x-model.number="form.precio"
+               :class="{ 'is-invalid': intento && errores.precio }">
+        <div class="invalid-feedback" x-text="errores.precio"></div>
+      </div>
+      <div class="col-md-2">
+        <input type="number" class="form-control" placeholder="Cant." x-model.number="form.cantidad"
+               :class="{ 'is-invalid': intento && errores.cantidad }">
+        <div class="invalid-feedback" x-text="errores.cantidad"></div>
+      </div>
+      <div class="col-md-1 d-grid"><button class="btn btn-primary" x-text="form.id ? '✓' : '+'">+</button></div>
+      <div class="col-12" x-show="form.id">
+        <span class="text-muted me-2">Editando producto</span>
+        <button type="button" class="btn btn-sm btn-secondary" @click="cancelar()">Cancelar edición</button>
+      </div>
+    </form>
+
+    <div class="row g-2 mb-2 align-items-center">
+      <div class="col-md-6"><input type="search" class="form-control" placeholder="Buscar..." x-model.debounce.200ms="busqueda"></div>
+      <div class="col-md-3">
+        <div class="form-check">
+          <input id="solo-bajo" type="checkbox" class="form-check-input" x-model="soloBajo">
+          <label for="solo-bajo" class="form-check-label">Solo stock bajo (&lt; 5)</label>
+        </div>
+      </div>
+      <div class="col-md-3 text-md-end text-muted"><span x-text="filtrados.length"></span> productos</div>
+    </div>
+
+    <table class="table table-striped table-sm align-middle bg-white">
+      <thead class="table-dark">
+        <tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Cantidad</th><th></th></tr>
+      </thead>
+      <tbody>
+        <template x-for="p in filtrados" :key="p.id">
+          <tr>
+            <td x-text="p.nombre"></td>
+            <td x-text="p.categoria"></td>
+            <td x-text="'$' + p.precio.toFixed(2)"></td>
+            <td><span class="badge" :class="p.cantidad < 5 ? 'bg-danger' : 'bg-success'" x-text="p.cantidad"></span></td>
+            <td class="text-end">
+              <button class="btn btn-sm btn-outline-primary me-1" @click="editar(p)">Editar</button>
+              <button class="btn btn-sm btn-outline-danger" @click="confirmar = p">Eliminar</button>
+            </td>
+          </tr>
+        </template>
+        <tr x-show="!cargando && filtrados.length === 0">
+          <td colspan="5" class="text-center text-muted py-3">No hay productos que mostrar.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div x-show="confirmar" x-transition.opacity x-cloak
+         style="position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:1050"
+         @click.self="confirmar = null" @keydown.escape.window="confirmar = null">
+      <div class="d-flex align-items-center justify-content-center h-100 pe-none">
+        <div class="card shadow pe-auto" style="max-width:380px">
+          <div class="card-body">
+            <h5 class="card-title">Eliminar producto</h5>
+            <p>¿Desea eliminar <strong x-text="confirmar?.nombre"></strong>?</p>
+            <div class="text-end">
+              <button class="btn btn-secondary me-2" @click="confirmar = null">Cancelar</button>
+              <button class="btn btn-danger" @click="eliminarConfirmado()">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div x-data="avisos" @aviso.window="mostrar($event.detail)"
+       class="position-fixed top-0 end-0 p-3" style="z-index:1080">
+    <div x-show="visible" x-transition x-cloak class="alert shadow mb-0"
+         :class="'alert-' + tipo" x-text="texto"></div>
+  </div>
+</body>
+</html>
